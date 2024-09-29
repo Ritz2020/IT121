@@ -1,1 +1,1 @@
-# IT121 created for IT121 Intro Java Scripts assignments 
+# IT121 created for Intro Java Scripts assignments 
