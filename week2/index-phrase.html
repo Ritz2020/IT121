@@ -1,0 +1,58 @@
+<!-- Program name: "Pig Latin Words-phrase Game". Author: Yan Zhao; Date: Oct. 05 2024-->
+ <!-- Pseudo-code: 
+  1. prompt: Input phrase;
+  2.split phrase into words array;
+  3. for loop test every word in turns, then reposition, get word-pigLatinWord, push into pigLatinWord array.
+     inside for loop,
+   3.1 if input word is not empty
+    excute embeded if statement
+        3.1.1  if "aeiou"(vowels) includes firstChar of word, output word+"way";
+        3.1.2  elseif word.length>1 & !"aeiou" includes firstChar and word.charAt(1), scice word after second letter, reposition letters;
+        3.1.3  else !"aeiou" includes only firstChar, slice word after first letter, reposition letters and convert it to pigLatinWord;
+        3.1.3  push converted word to pigLatinWord array;
+   3.2 else if input word is empty, reture warning;
+  4 join pigLatinWord array to phrase;
+  5 document.write return converted outputPhrase-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pig Latin Words Game-phase</title>
+</head>
+<body>
+
+<script>
+let phrase = prompt("Please enter a phrase without punctuations"); // Input phrase
+let words = phrase.split(' '); // Split the sentence into words
+let pigLatinWords = []; // Array to hold the Pig Latin words
+
+// Process words one by one
+
+for (let i=0; i < words.length; i++) {
+    let word = words[i];
+
+
+if (word) { // Check if the word is not empty
+    let firstChar = word.charAt(0).toLowerCase(); // first character in lower case
+    let pigLatinWord = '';
+
+    if ('aeiou'.includes(firstChar)) {
+         pigLatinWord = word + 'way';
+   } else if (word.length > 1 && !'aeiou'.includes(firstChar) && !'aeiou'.includes(word.charAt(1).toLowerCase())) {
+     pigLatinWord = word.slice(2) + word.slice(0, 2) + 'ay';
+   } else {
+        pigLatinWord = word.slice(1) + firstChar + 'ay';
+   }
+   pigLatinWords.push(pigLatinWord); // Add the converted word to the array
+} else{ // if the word is empty
+    document.write("You need to enter at least one word!");
+}
+}
+let outputPhrase = pigLatinWords.join(' ') // Join the array to phrase
+document.write(outputPhrase);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!-- Program name: "Pig Latin Words Game". Author: Yan Zhao; Date: Oct. 05 2024-->
+ <!-- Pseudo-code: 
+  1. prompt: Input word
+  2. if input word is not empty
+  3.embeded if "aeiou"(vowels) includes firstChar of word, output word+"way", return converted new word;
+           elseif word.length>1 & !"aeiou" includes firstChar and word.charAt(1), scice word after second letter, reposition letters, return converted new word;
+           else !"aeiou" includes only firstChar, slice word after first letter, reposition letters, return converted new word;
+  4 else input word is empty, reture warning -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pig Latin Words Game</title>
+</head>
+<body>
+
+<script>
+word = prompt("Let's start the Pig Latin words game! Please Enter a word.");
+if (word) { 
+    let firstChar = word.charAt(0).toLowerCase(); 
+    
+    if ('aeiou'.includes(firstChar)) {
+       document.write ( word + 'way');
+    } else if (word.length > 1 && !'aeiou'.includes(firstChar) && !'aeiou'.includes(word.charAt(1).toLowerCase())) {
+       document.write( word.slice(2) + word.slice(0, 2) + 'ay');
+    } else {
+    document.write( word.slice(1) + firstChar + 'ay');
+    }
+}else{
+    document.write("You entered nothing. Please repfresh and enter a word!")
+}
+</script>
+</body>
+</html>
