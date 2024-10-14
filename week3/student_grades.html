@@ -1,0 +1,76 @@
+<!--split string - grades, creat array - newGrades
+    create empty array - capitalizedGrades
+    for loop to split newGrades[i] to creat array - parts
+    creat strings to distingush name and grade, capitalize name by charAt(0).toUpperCase()
+    push name and score to update capitalizedGrades
+    sort() to reoder elements in capitalizedGrades
+    for loop to output name-score one element each line
+    for loop to split capitalizedGrades to separate score string then parseIn() it to number, then push(score) to array - scores
+    calculate average by sum(scores)/scores.length
+    calculate max and min by for loop and if statement -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student grades</title>
+</head>
+
+<body>
+
+    <script>
+        const grades = "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+        const newGrades = grades.split(", ");
+
+        // Create an array to hold the formatted and capitalized names
+        const capitalizedGrades = [];
+
+        // Process each grade entry
+        for (let i = 0; i < newGrades.length; i++) {
+            const parts = newGrades[i].split("|"); // Split by '|'
+            const name = parts[0].charAt(0).toUpperCase() + parts[0].slice(1); // Capitalize the name
+            const score = parts[1]; // Get the score
+            capitalizedGrades.push(name + " - " + score); // Add to the new array
+        }
+
+        // Sort the array of capitalized names
+        capitalizedGrades.sort();
+        document.write("Name - Score <br>");
+        // Write each element on a new line
+        for (let i = 0; i < capitalizedGrades.length; i++) {
+            document.write(capitalizedGrades[i] + "<br>"); // Add <br> for a new line
+        }
+        document.write("<br>");
+        document.write("Total students: " + capitalizedGrades.length + "<br>");
+
+        const scores = [];
+        for (let i = 0; i < capitalizedGrades.length; i++) {
+            const parts = capitalizedGrades[i].split(" - ");
+            const score = parseInt(parts[1]);
+            scores.push(score);
+        }
+
+        let sum = 0;
+        let maxScore = 0;
+        let minScore = 100;
+
+        for (let i = 0; i < scores.length; i++) {
+            sum += scores[i];
+            if (scores[i] > maxScore) {
+                maxScore = scores[i];
+            }
+            if (scores[i] < minScore) {
+                minScore = scores[i];
+            }
+        }
+        const averageScore = sum / scores.length;
+        document.write("Average score: " + averageScore + "<br>");
+        document.write("Hignest score: " + maxScore + "<br>");
+        document.write("Lowest score: " + minScore);
+
+    </script>
+
+</body>
+
+</html>
