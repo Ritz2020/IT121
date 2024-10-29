@@ -24,20 +24,31 @@ const cards =[];
 for (let e=0; e<4; e++) {
     for (let i = 0; i < 13; i++) {
     const card= { value: values[i], suit:suits[e]}
-    cards.push[card];
+    cards.push(card);
     let index = cards.length - 1;
+    if(value[i]==11){ 
+        value[i]="Jack";}
+    elseif(value[i]==12);{ 
+        value[i]="Queen";
+    }elseif(value[i]==13);{ 
+        value[i]="King";}
+    elseif(value[i]==14);{ 
+        value[i]="Ace";}
+    return(`Card ${index}: ${values[i]} of ${suits[e]}`);
+
     return(`Card ${index}: ${values[i]} of ${suits[e]}`);
 }  
 }
-
-  const dealHand = () => { for (let n=0; n<5; n++ ) {
+/* code to deal a card hand goes here */
+ 
+  const dealHand = () => { 
     let card_hand=[];
+    for (let n=0; n<5; n++ ) {
     let x = Math.floor(Math.random() * 52)
     card_hand.push(cards[x]); 
-    return(card_hand);
-  }
-    /* code to deal a card hand goes here */
-
+    }
+    
+    
     // update 'card_hand' DIV with appropriate information
     document.write("The values of the cads in this hand are " `${card_hand}`);$("#card_hand").html("Button clicked");
 
