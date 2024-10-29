@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script
+          src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+</head>
+<body>
+
+<h1>Robo Dealer</h1>
+
+  <button onclick="dealHand();">Deal Hand</button>
+
+<hr><div id="card_hand"></div>
+
+<script>
+
+  /* define Card object and deck of cards here */
+const values = [2,3,4,5,6,7,8,9,10,11,12,13,14];
+const suits = ["Spade", "Heart", "Diamond", "Club"];
+const cards =[];
+
+for (let e=0; e<4; e++) {
+    for (let i = 0; i < 13; i++) {
+    const card= { value: values[i], suit:suits[e]}
+    cards.push[card];
+    let index = cards.length - 1;
+    return(`Card ${index}: ${values[i]} of ${suits[e]}`);
+}  
+}
+
+  const dealHand = () => { for (let n=0; n<5; n++ ) {
+    let card_hand=[];
+    let x = Math.floor(Math.random() * 52)
+    card_hand.push(cards[x]); 
+    return(card_hand);
+  }
+    /* code to deal a card hand goes here */
+
+    // update 'card_hand' DIV with appropriate information
+    document.write("The values of the cads in this hand are " `${card_hand}`);$("#card_hand").html("Button clicked");
+
+    return false; // prevent page reload
+  }
+
+</script>
+
+</body>
+</html>
