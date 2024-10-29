@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script
+          src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+</head>
+<body>
+
+<h1>Robo Dealer</h1>
+
+  <button onclick="dealHand();">Deal Hand</button>
+
+<hr><div id="card_hand"></div>
+
+<script>
+
+  /* define Card object and deck of cards here */
+const values = [2,3,4,5,6,7,8,9,10,11,12,13,14];
+const suits = ["Spade", "Heart", "Diamond", "Club"];
+const cards =[];
+
+for (let e=0; e<4; e++) {
+    for (let i = 0; i < 13; i++) {
+    const card= { value: values[i], suit:suits[e]}
+    cards.push(card);
+    let index = cards.length;
+    if(values[i]==11){ 
+        values[i]="Jack";}
+    else if(values[i]==12){ 
+        values[i]="Queen";
+    }else if(values[i]==13){ 
+        values[i]="King";}
+    else if(values[i]==14){ 
+        values[i]="Ace";}
+    console.log(`Card ${index}: ${values[i]} of ${suits[e]}`);
+
+}  
+}
+/* code to deal a card hand goes here */
+  document.write("Click the botton and find out the values of the cards in this hand.<br>" );
+  const dealHand = () => { 
+
+    for (let n=0; n<5; n++ ) {
+    let x = Math.floor(Math.random() * 52)
+    let card=cards[x]; 
+    
+ // update 'card_hand' DIV with appropriate information
+   
+    document.write(`${card.value} of ${card.suit}<br>`);
+}
+    $("#card_hand").html("Button clicked");
+    
+    return false; // prevent page reload
+  }
+
+</script>
+
+</body>
+</html>
