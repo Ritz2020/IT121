@@ -76,7 +76,7 @@
         $('#tableBody tr:visible:even').css('background-color','yellow');
         $('#tableBody tr:visible:odd').css('background-color','white');
       }     
-        // - add click handler to show only rows matching selected 'house'. Enable buttons to call this handler. 
+        // - add click handler to show only rows matching selected 'house'.  
 
         function filterByHouse(house) {
             $('#tableBody tr' ).each(function() {
@@ -92,7 +92,7 @@
             $('#tableBody tr:visible:odd').css('background-color','white');
             
         }
-
+        // Enable buttons to call this handler.
         $(document).on('click', '.houseBtn',function() {
                 const house= $(this).text();
                 filterByHouse(house);
