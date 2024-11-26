@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    </head>
+<body>
+  <h3>Daily Weather Forecast</h3>
+  <hr>
+  <form id="testform">
+    City: <input type="text" name="city" id="city">
+    State:
+    <select name="state" id="state">
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="IA">Iowa</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="ME">Maine</option>
+        <option value="MD">Maryland</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MS">Mississippi</option>
+        <option value="MO">Missouri</option>
+        <option value="MT">Montana</option>
+        <option value="NE">Nebraska</option>
+        <option value="NV">Nevada</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico</option>
+        <option value="NY">New York</option>
+        <option value="NC">North Carolina</option>
+        <option value="ND">North Dakota</option>
+        <option value="OH">Ohio</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="SD">South Dakota</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UT">Utah</option>
+        <option value="VT">Vermont</option>
+        <option value="VA">Virginia</option>
+        <option value="WA">Washington</option>
+        <option value="WV">West Virginia</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WY">Wyoming</option>
+    </select>
+  </form>
+  <button>Submit</button>
+  <div id="forecast"></div>
+
+  <script>
+    let API_KEY = "8a23ea1941fa9a3c9f6efb14ed6af360";
+
+    const kelvinToF = (value) => {
+        let fahrenheit = (((Number(value) - 273.15) * 9) / 5) + 32;
+        return fahrenheit.toFixed(2);
+    }
+
+    document.querySelector('button').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const city = document.getElementById('city').value.trim();
+        const state = document.getElementById('state').value;
+
+        if (!city || !isNaN(city)) {
+            document.getElementById('forecast').innerHTML = '<p>Please enter a valid city name.</p>';
+            return;
+        }
+
+        document.getElementById('forecast').innerHTML = '<p>Loading...</p>';
+        document.querySelector('button').disabled = true;
+
+        // First API request: Get latitude and longitude
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=${API_KEY}`)
+            .then((response) => response.json())
+            .then((geoData) => {
+                if (!geoData.length) {
+                    throw new Error("Location not found.");
+                }
+
+                const { lat, lon } = geoData[0];
+
+                // Second API request: Get weather forecast
+                return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+            })
+            .then((response) => response.json())
+            .then((forecastData) => {
+                if (!forecastData.list || !forecastData.list.length) {
+                    throw new Error("No forecast data available.");
+                }
+
+                document.getElementById('forecast').innerHTML = '';
+
+                forecastData.list
+                    .filter(entry => entry.dt_txt.includes("12:00:00"))
+                    .forEach((day) => {
+                        const forecastDate = new Date(day.dt * 1000);
+                        const icon = `https://openweathermap.org/img/w/${day.weather[0].icon}.png`;
+                        const description = day.weather[0].description;
+                        const minTemp = kelvinToF(day.main.temp_min);
+                        const maxTemp = kelvinToF(day.main.temp_max);
+                        const humidity = day.main.humidity;
+
+                        document.getElementById('forecast').innerHTML += `
+                            <div>
+                                <p>Date: ${forecastDate.toDateString()}</p>
+                                <p>Min Temp: ${minTemp} °F</p>
+                                <p>Max Temp: ${maxTemp} °F</p>
+                                <p>Humidity: ${humidity}%</p>
+                                <p>Description: ${description}</p>
+                                <img src="${icon}" alt="${description}">
+                            </div>
+                            <hr>
+                        `;
+                    });
+            })
+            .catch((err) => {
+                document.getElementById('forecast').innerHTML = `<p style="color: red;">Error: ${err.message}</p>`;
+            })
+            .finally(() => {
+                document.querySelector('button').disabled = false;
+            });
+    });
+  </script>
+</body>
+</html>
