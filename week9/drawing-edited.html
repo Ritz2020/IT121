@@ -31,8 +31,13 @@
     context.beginPath();
     context.arc(250, 150, 30, 0,  Math.PI, 90);
     context.stroke();
+    
+
     context.rect(220, 150, 60, 100);
     context.strokeStyle = "red";
+    context.stroke();
+    context.scale(0.9, 0.9);
+    context.rect(248, 172, 60, 100);
     context.stroke();
 
     let x_coord = 0;  
@@ -48,8 +53,7 @@
         x_coord += 5;
         if (x_coord > canvas.width) {
             x_coord = -150;   // Reset to the left (negative width of the text)
-        }
-    };
+        }};
     const interval =  setInterval(movingText,50);
 
 
