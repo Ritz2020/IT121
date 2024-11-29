@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>HTML5 Canvas</h1>
+
+<canvas id="myCanvas" width="400" height="300" style="border:1px solid grey"></canvas>
+
+<script>
+    let canvas = document.getElementById('myCanvas');
+    let context = canvas.getContext('2d');
+    context.rect(100, 100, 200, 150);
+    context.stroke();
+    context.fillStyle = "orange";
+    context.fillRect(120, 150, 24, 24);
+    context.save();
+    context.restore();
+    context.fillRect(145, 150, 24, 24);
+    context.restore();
+    context.fillRect(120, 175, 24, 24);
+    context.restore();
+    context.fillRect(145, 175, 24, 24);
+
+    context.beginPath();
+    context.moveTo(80, 100);
+    context.lineTo(200, 40);
+    context.lineTo(320, 100);
+    context.closePath();
+    context.fillStyle = "red";
+    context.fill();
+    
+    context.beginPath();
+    context.arc(250, 150, 30, 0,  Math.PI, 90);
+    context.stroke();
+    context.rect(220, 150, 60, 100);
+    context.strokeStyle = "red";
+    context.stroke();
+
+    let x_coord = 0;  
+    let y_coord = 35; 
+
+    context.font = "30px Arial";
+    context.fillStyle = "darkblue";
+
+    const movingText = () => {
+        // Clear the entire canvas
+        context.clearRect(0, 0, canvas.width, 40);
+        context.fillText("Welcome Home", x_coord, y_coord);
+        x_coord += 5;
+        if (x_coord > canvas.width) {
+            x_coord = -150;   // Reset to the left (negative width of the text)
+        }
+    };
+    const interval =  setInterval(movingText,50);
+
+
+    
+</script>
+
+
+</body>
+</html>
