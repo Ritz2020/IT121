@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // let course = "it121";
 // console.log(course);
+=======
+>>>>>>> 775805288470ffb7b7557a2eb5058c708fdb7606
 import http from 'http';
 import fs from 'fs';
 http.createServer((req,res) => {
