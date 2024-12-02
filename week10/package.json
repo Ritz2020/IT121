@@ -1,0 +1,21 @@
+{
+    "name": "it121",
+    "version": "1.0.0",
+    "description": "apply to node application",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Ritz2020/IT121.git"
+    },
+    "author": "yan zhao",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/Ritz2020/IT121/issues"
+    },
+    "homepage": "https://github.com/Ritz2020/IT121#readme"
+  }
+  

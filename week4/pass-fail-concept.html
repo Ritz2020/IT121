@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+
+<h1>Functions & validation</h1>
+
+<form id="form1" action="#" onsubmit="return validateForm(this);">
+  first name: <input type="text" name="firstname"><br>
+  last name: <input type="text" name="lastname"><br>
+  password: <input type="text" name="password"><br>
+
+  <button >Check</button>
+</form>
+
+<hr><div id="message"></div>
+
+<script>
+
+  const validateForm = (myForm) => {
+
+     // add validatePassword function here
+    const validatePassword =(password) => {
+        if (const hasUpperCase=/[A-Z]/.test(password);
+            const haslowerCase=/[a-z]/.test(password);
+            const has8Charts=password.length == 8;
+        return has8Charts && hasUpperCase && haslowerCase)
+            { let message1 = "Password is valid";
+
+            } else { let message2 = "Please enter a valid password";
+
+            }}
+            let password = myForm.password.value; 
+            validatePassword = (password);
+
+    const validateName = (name) => {
+
+        if (const hasFirstName = (firstname);
+            const hasLastName = (lastname);
+            return hasLastName && hasFirstName;
+        ) {
+            let message3 = "Name is valid!";
+        } else {
+            let message4 = "Your first or last name is missing.";
+        }
+    }
+       let firstname = myForm.firstname.value; // get text of firstname field
+       let lastname = myForm.lastname.value; 
+       validateName = (name);
+
+       if (message1 && message3
+       
+       ){ return true;
+        document.write("You've completed the form!")
+       }elasif (message1){ let message5="Your failed to complete the form. Please try again!"
+        document.write("Your failed to complete the form. Please try again! " +message4)
+       }else{
+        document.write("Your failed to complete the form. Please try again! " +message2)
+       }
+
+   
+
+    
+
+    /* Form validation code goes here
+    */
+
+    // use this syntax to update 'message' DIV with appropriate wording
+    // $("#message").html("message");
+
+    return false; // prevent page reload
+  }
+
+</script>
+
+</body>
+</html> 

@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <script
+                src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+    </head>
+    <style>
+        .over {
+            background-color: orange;
+        }
+        .selected {
+            background-color: green;
+        }
+    </style>
+
+    <body>
+        <div id="buttons"></div>
+        <table border='1'>
+            <tr>
+                <th>name</th>
+                <th>role</th>
+                <th>house</th>
+                <th>gender</th>
+                <th>alignment</th>
+            </tr>
+            <tbody id="tableBody"></tbody>
+        </table>
+        <button id="reset">Reset</button>
+    </body>
+        
+    <script>
+    // List of characters
+    let characters = [
+        {name:"Albus Dumbledore", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Nymphadora Tonks", role:"", house:"Hufflepuff",gender:"f",alignment:"good"},    
+        {name:"Ron Weasley", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Ginny Weasley", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Hermione Granger", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Mad-eye Moody", role:"staff", house:"",gender:"m",alignment:"good"},    
+        {name:"Prof McGonagall", role:"staff", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Harry Potter", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Draco Malfoy", role:"student", house:"Slytherin",gender:"m",alignment:"evil"},    
+        {name:"Hagrid", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Luna Lovegood", role:"student", house:"Ravenclaw",gender:"f",alignment:"good"},    
+        {name:"Voldemort", role:"", house:"Slytherin",gender:"m",alignment:"evil"},    
+        {name:"Bellatrix Lestrange", role:"", house:"Slytherin",gender:"f",alignment:"evil"},           
+        {name:"Severus Snape", role:"staff", house:"Slytherin",gender:"m",alignment:"?"}
+    ];
+
+    $(document).ready(function(){
+        // Create an empty array to store unique house names
+        let houses = [];
+
+        // Collect unique house names using an array
+        characters.forEach(character => {
+            if (!houses.includes(character.house)) {
+                houses.push(character.house); // Add house if it's not already in the array
+            }
+        });
+
+        // Create buttons for each unique house
+        houses.forEach(house => {
+            let button = $('<button></button>').text(house).attr('data-house', house);
+            $('#buttons').append(button);
+        });
+
+        // Function to generate table rows dynamically
+        function addToTable(houseFilter = null) {
+            const tbody = $('#tableBody');
+            tbody.empty(); // Clear the table body before adding rows
+
+            characters.forEach((character, index) => {
+                // If a house filter is applied, skip characters that don't match the filter
+                if (houseFilter && character.house !== houseFilter) return;
+
+                const tr = $('<tr></tr>').addClass(index % 2 === 0 ? 'over' : ''); // Apply alternating background color
+                tr.append(`<td>${character.name}</td>`);
+                tr.append(`<td>${character.role || "N/A"}</td>`);
+                tr.append(`<td>${character.house || "N/A"}</td>`);
+                tr.append(`<td>${character.gender}</td>`);
+                tr.append(`<td>${character.alignment}</td>`);
+
+                tbody.append(tr);
+            });
+        }
+
+        // Call addToTable initially to populate the table
+        addToTable();
+
+        // Event listener for house filter buttons
+        $('#buttons').on('click', 'button', function() {
+            const houseFilter = $(this).data('house');
+            addToTable(houseFilter); // Filter rows based on selected house
+        });
+
+        // Event listener for reset button to show all rows
+        $('#reset').on('click', function() {
+            addToTable(); // Reset the table to show all rows
+        });
+    });
+    </script>
+</html>

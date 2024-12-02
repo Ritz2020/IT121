@@ -39,18 +39,17 @@ for (let e=0; e<4; e++) {
 }  
 }
 /* code to deal a card hand goes here */
- 
+  document.write("The values of the cards in this hand are:<br>" );
   const dealHand = () => { 
-    let card_hand=[];
+
     for (let n=0; n<5; n++ ) {
-    let x = Math.floor(Math.random() * 52);
-    card_hand.push(cards[x]); 
-    }
+    let x = Math.floor(Math.random() * 52)
+    let card=cards[x]; 
     
-    
-    // update 'card_hand' DIV with appropriate information
-    document.write("The values of the cards in this hand are:<br>" );
-    document.write(`${card.value} of ${card.suit}`).join <br>`);
+ // update 'card_hand' DIV with appropriate information
+   
+    document.write(`${card.value} of ${card.suit}<br>`);
+}
     $("#card_hand").html("Button clicked");
     
     return false; // prevent page reload

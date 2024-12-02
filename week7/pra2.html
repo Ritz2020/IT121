@@ -1,0 +1,104 @@
+<html>
+<head>
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+</head>
+<style>
+    .over {
+        background-color: orange;
+    }
+    .selected {
+        background-color: green;
+    }
+</style>
+
+<body>
+    <div id="buttons"></div>
+    <table border='1'>
+        <tr>
+            <th>name</th>
+            <th>role</th>
+            <th>house</th>
+            <th>gender</th>
+            <th>alignment</th>
+        </tr>
+    </table>
+    <button id="reset-btn">reset</button>
+</body>
+
+<script>
+// list of characters
+let characters = [
+    {name:"Albus Dumbledore", role:"staff", house:"Gryffindor", gender:"m", alignment:"good"},    
+    {name:"Nymphadora Tonks", role:"", house:"Hufflepuff", gender:"f", alignment:"good"},    
+    {name:"Ron Weasley", role:"student", house:"Gryffindor", gender:"m", alignment:"good"},    
+    {name:"Ginny Weasley", role:"student", house:"Gryffindor", gender:"f", alignment:"good"},    
+    {name:"Hermione Granger", role:"student", house:"Gryffindor", gender:"f", alignment:"good"},    
+    {name:"Mad-eye Moody", role:"staff", house:"", gender:"m", alignment:"good"},    
+    {name:"Prof McGonagall", role:"staff", house:"Gryffindor", gender:"f", alignment:"good"},    
+    {name:"Harry Potter", role:"student", house:"Gryffindor", gender:"m", alignment:"good"},    
+    {name:"Draco Malfoy", role:"student", house:"Slytherin", gender:"m", alignment:"evil"},    
+    {name:"Hagrid", role:"staff", house:"Gryffindor", gender:"m", alignment:"good"},    
+    {name:"Luna Lovegood", role:"student", house:"Ravenclaw", gender:"f", alignment:"good"},    
+    {name:"Voldemort", role:"", house:"Slytherin", gender:"m", alignment:"evil"},    
+    {name:"Bellatrix Lestrange", role:"", house:"Slytherin", gender:"f", alignment:"evil"},           
+    {name:"Severus Snape", role:"staff", house:"Slytherin", gender:"m", alignment:"?"}
+];
+
+$(document).ready(function() {
+    // Select the table and buttons container
+    const $tableBody = $('table tbody');
+    const $buttonsContainer = $('#buttons');
+    const houses = new Set(); // To store unique houses
+
+    // Step 1: Generate the table rows and house filter buttons
+    characters.forEach((character, index) => {
+        // Create the table row
+        const row = $('<tr>');
+        row.append(`<td>${character.name}</td>`);
+        row.append(`<td>${character.role}</td>`);
+        row.append(`<td>${character.house}</td>`);
+        row.append(`<td>${character.gender}</td>`);
+        row.append(`<td>${character.alignment}</td>`);
+        
+        // Add alternating background color for rows
+        if (index % 2 === 0) {
+            row.addClass('over');
+        }
+
+        // Append the row to the table body
+        $tableBody.append(row);
+
+        // Add the house to the set of houses
+        if (character.house) {
+            houses.add(character.house);
+        }
+    });
+
+    // Step 2: Create filter buttons for each unique house
+    houses.forEach(house => {
+        const $button = $('<button>').text(house).addClass('house-btn');
+        $button.on('click', function() {
+            // Show rows that match the selected house, hide others
+            $('tr').not(':first').each(function() { // Exclude header row
+                if ($(this).find('td').eq(2).text() === house) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $buttonsContainer.append($button);
+    });
+
+    // Step 3: Add the reset button functionality
+    $('#reset-btn').on('click', function() {
+        // Show all rows when reset button is clicked
+        $('tr').not(':first').show();
+    });
+});
+</script>
+
+</html>

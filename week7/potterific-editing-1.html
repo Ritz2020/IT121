@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <script
+                src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+    </head>
+    <style>
+        .over {
+            background-color: orange;
+        }
+        .selected {
+            background-color: green;
+        }
+    </style>
+
+    <body>
+        <div id="buttons"></div>
+        <table border='1'>
+            <tr>
+                <th>name</th>
+                <th>role</th>
+                <th>house</th>
+                <th>gender</th>
+                <th>alignment</th>
+            </tr>
+            <tbody id="tabbleBody">
+
+            </tbody>
+        </table>
+        <button>reset</button>
+    </body>
+        
+        <script>
+        // list of characters
+        let characters = [
+        {name:"Albus Dumbledore", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Nymphadora Tonks", role:"", house:"Hufflepuff",gender:"f",alignment:"good"},    
+        {name:"Ron Weasley", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Ginny Weasley", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Hermione Granger", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Mad-eye Moody", role:"staff", house:"",gender:"m",alignment:"good"},    
+        {name:"Prof McGonagall", role:"staff", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Harry Potter", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Draco Malfoy", role:"student", house:"Slytherin",gender:"m",alignment:"evil"},    
+        {name:"Hagrid", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Luna Lovegood", role:"student", house:"Ravenclaw",gender:"f",alignment:"good"},    
+        {name:"Voldemort", role:"", house:"Slytherin",gender:"m",alignment:"evil"},    
+        {name:"Bellatrix Lestrange", role:"", house:"Slytherin",gender:"f",alignment:"evil"},           
+        {name:"Severus Snape", role:"staff", house:"Slytherin",gender:"m",alignment:"?"}
+        ];
+
+        $(document).ready(function(){
+            <button id="house">Gryffindor</button>;
+            <button id="house">Hufflepuff</button>; 
+            <button id="house">Slytherin</button>;   
+            <button id="house">Ravenclaw</button>; 
+        
+        // - add a button for each 'house' value
+        function addToTable(){
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+
+        
+
+        characters.forEach(character =>{
+            const tr = documen.createElement("tr");
+            const tdName = documen.createElement("td");
+            tdName.textContent = character.name;
+
+            const tdRole = documen.createElement("td");
+            tdRole.textContent = character.role;
+
+            const tdHouse = documen.createElement("td");
+            tdHouse.textContent = character.house;
+
+            const tdGender = documen.createElement("td");
+            tdGenger.textContent = character.gender;
+
+            const tdAlignment = documen.createElement("td");
+            tdAlignment.textContent = character.alignment;
+
+           
+            tr.appendChild(tdName);
+            tr.appendChild(tdRole) || "N/A";
+            tr.appendChild(tdHouse) || "N/A";
+            tr.appendChild(tdGender);
+            tr.appendChild(tdAlignment);
+
+            tBody.appendChild(tr);
+           
+        });
+    }
+
+        // - add table row for each character
+      
+        $("tr:even").css("background-color","yellow");
+        // - set visible rows to alternating background color
+       const buttons = $("button");
+       buttons.on("click",(e) => {
+        
+       })          
+        // - add click handler to show only rows matching selected 'house'. Enable buttons to call this handler. 
+        
+        // - add click handler to reset table 
+        
+
+        });
+
+        </script>
+</html>

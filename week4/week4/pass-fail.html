@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+
+<h1>Functions & validation</h1>
+
+<form id="form1" action="#" onsubmit="return validateForm(this);">
+  first name: <input type="text" name="firstname"><br>
+  last name: <input type="text" name="lastname"><br>
+  password: <input type="text" name="password"><br>
+
+  <button >Check</button>
+</form>
+
+<hr><div id="message"></div>
+
+<script>
+    const validateForm = (myForm) => {
+      
+      // Function to validate password
+      const validatePassword = (password) => {
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const has8Chars = password.length >= 8; 
+        return has8Chars && hasUpperCase && hasLowerCase;
+      };
+  
+      let password = myForm.password.value;
+      let message1;
+  
+      if (validatePassword(password)) {
+        message1 = "Password is valid.";
+      } else {
+        message1 = "Please enter a valid password! Password must be at least 8 characters long and contain at least one uppercase letter and one lowercase letter.";
+      }
+  
+      // Validate first and last name
+      let firstname = myForm.firstname.value; // get text of firstname field
+      let lastname = myForm.lastname.value; // get text of lastname field
+      let message2;
+  
+      const validateName = (name) => {
+        return name.length > 0; // Check if name is not empty
+      };
+  
+      if (validateName(firstname) && validateName(lastname)) {
+        message2 = "Name is valid!";
+      } else {
+        message2 = "Your first or/and last name is missing.";
+      }
+  
+      // Output results
+      if (message1 === "Password is valid." && message2 === "Name is valid!") {
+        $("#message").html("You've completed the register form!");
+        return false; // Valid form
+      } else {
+        $("#message").html("You failed to complete the register form. Please try again! " + "<br>" +
+          (message1 === "Password is valid." ? "" : message1 + "<br>") + 
+          (message2 === "Name is valid!" ? "" : message2));
+        return false; // Invalid form
+      }
+    }
+  </script>
+
+</body>
+</html> 
